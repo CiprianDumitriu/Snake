@@ -1,11 +1,23 @@
-const rows = 16
-const columns = 16
+const gameBoard = document.querySelector(".gameBoard")
+console.log(gameBoard)
 const gameGrid = []
-for (let i = 0; i < rows; i++) {
+for (let i = 0; i < 15; i++) {
     gameGrid[i] = []
-    for (let j = 0; j < columns; j++) {
+    createRow()
+    for (let j = 0; j < 15; j++) {
         gameGrid[i][j] = null
     }
 }
+
+const rows = document.querySelectorAll(".row")
+console.log(rows)
+
+function createRow() {
+    let createRow = document.createElement('div')
+    createRow.setAttribute("class", "row")
+    gameBoard.appendChild(createRow)
+}
+
+
 
 console.log(gameGrid)
