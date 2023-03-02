@@ -1,8 +1,10 @@
 const gameBoard = document.querySelector(".gameBoard")
 const keyboard = document.querySelector(".keyboard")
 const gameGrid = []
-let snake = [2, 2]
+let snake = [2]
 let previousKey = "d"
+let direction = 1
+let key = "d"
 for (let i = 0; i < 15; i++) {
     gameGrid[i] = []
     createRow()
@@ -20,29 +22,31 @@ rows.forEach((row) => {
     }
 })
 
-window.setInterval(handleMovement, 500)
+let cells = document.querySelectorAll(".cell")
+
+
+window.setInterval(handleMovement, 5000)
 window.addEventListener("keydown", e => {
-    // handleMovement(e.key)
-    
-    
-    if (e.key === "a" && previousKey != "d") {
-        snake[0] -= 1
-        previousKey = e.key
-    } else if (e.key === "w" && previousKey != "s") {
-        snake[1] -= 1
-        previousKey = e.key
-    } else if (e.key === "s" && previousKey != "w") {
-        snake[1] += 1
-        previousKey = e.key
-    } else if (e.key === "d" && previousKey != "a") {
-        snake[0] += 1
-        previousKey = e.key
-    } else {
-        previousKey = previousKey
+    if (e.key === "a" && key != "d"  || e.key === "w" && key != "s"  || e.key === "d" && key != "a"  || e.key === "s" && key != "w") {
+        key = e.key
     }
+    
 })
 
-
+function handleMovement() {
+    if (key === "a") {
+        direction -= 1
+    } else if (key === "d") {
+        direction += 1
+    } else if (key === "w") {
+        direction -= 15
+    } else if (key === "s") {
+        direction += 15
+    }
+    snake.forEach((i) => {
+        cells[i].classList.add("current-position")
+    })
+}
 
 function createRow() {
     let createRow = document.createElement('div')
@@ -50,28 +54,7 @@ function createRow() {
     gameBoard.appendChild(createRow)
 }
 
-function handleMovement(key) {
-    // if (key === "a" && previousKey != "d") {
-    //     snake[0] -= 1
-    //     previousKey = key
-    // } else if (key === "w" && previousKey != "s") {
-    //     snake[1] -= 1
-    //     previousKey = key
-    // } else if (key === "s" && previousKey != "w") {
-    //     snake[1] += 1
-    //     previousKey = key
-    // } else if (key === "d" && previousKey != "a") {
-    //     snake[0] += 1
-    //     previousKey = key
-    // } else {
-    //     previousKey = previousKey
-    // }
-    let currentRow = document.querySelectorAll(`.row :nth-child(${snake[0]})`)
-    let currentCell = currentRow[snake[1]]
-    currentCell.setAttribute("class", "cell current-position")
-    console.log(currentCell)
-
-}
 
 
-console.log(gameGrid)
+
+
