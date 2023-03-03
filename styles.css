@@ -52,3 +52,7 @@ h1 {
 .current-position {
     background-color: green;
 }
+
+.apple {
+    background-color: red;
+} 
